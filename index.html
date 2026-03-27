@@ -65,6 +65,36 @@
       z-index:1;
     }
 
+    .ro-banner{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:10px;
+      align-items:center;
+      margin:0 0 14px 0;
+      padding:0 10px;
+    }
+
+    .ro-banner span{
+      display:block;
+      height:7px;
+      border-radius:999px;
+      box-shadow:
+        0 0 10px rgba(255,255,255,.04),
+        0 0 18px rgba(255,255,255,.03);
+    }
+
+    .ro-blue{
+      background:#002b7f;
+    }
+
+    .ro-yellow{
+      background:#fcd116;
+    }
+
+    .ro-red{
+      background:#ce1126;
+    }
+
     .content-scene{
       position:relative;
       isolation:isolate;
@@ -411,6 +441,11 @@
 <body>
   <div class="wrap">
     <div class="content-scene">
+      <div class="ro-banner" aria-hidden="true">
+        <span class="ro-blue"></span>
+        <span class="ro-yellow"></span>
+        <span class="ro-red"></span>
+      </div>
       <section class="hero window">
         <div class="hero-grid">
           <div>

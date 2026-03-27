@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/png" href="./favicon.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="./res/favicon.png" sizes="32x32">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CYBERMAN // HW-CTF — 2026</title>
@@ -9,482 +9,542 @@
   <style>
     :root{
       --bg:#05070c;
-      --panel: rgba(10,16,32,.72);
-      --panel2: rgba(10,16,32,.46);
+      --bg2:#04060a;
       --text:#e8f0ff;
       --muted:#9fb0d0;
       --neon:#57d6ff;
-      --neon2:#7CFFB2;
-      --danger:#ff4d6d;
-      --warn:#ffd166;
-      --border: rgba(255,255,255,.10);
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --neon2:#7cffb2;
+      --border:rgba(255,255,255,.10);
+      --mono:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      --shadow:0 18px 60px rgba(0,0,0,.55);
+
+      --art-w: 980px;
+      --art-top: 18px;
+      --art-left: -450px;
     }
 
-    *{box-sizing:border-box}
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
     body{
       margin:0;
       min-height:100vh;
       font-family:var(--sans);
       color:var(--text);
       background:
-        radial-gradient(900px 600px at 15% 10%, rgba(87,214,255,.18), transparent 55%),
-        radial-gradient(800px 520px at 85% 18%, rgba(124,255,178,.12), transparent 60%),
-        linear-gradient(180deg, #04060a, var(--bg));
+        radial-gradient(900px 600px at 15% 10%, rgba(87,214,255,.16), transparent 55%),
+        radial-gradient(800px 520px at 85% 18%, rgba(124,255,178,.08), transparent 60%),
+        linear-gradient(180deg, var(--bg2), var(--bg));
       overflow-x:hidden;
     }
 
-    body:before{
+    body::before{
       content:"";
-      position:fixed; inset:0;
+      position:fixed;
+      inset:0;
       pointer-events:none;
       background:
-        repeating-linear-gradient(180deg,
-          rgba(255,255,255,.03) 0px,
-          rgba(255,255,255,.03) 1px,
+        repeating-linear-gradient(
+          180deg,
+          rgba(255,255,255,.022) 0px,
+          rgba(255,255,255,.022) 1px,
           transparent 2px,
-          transparent 6px),
-        radial-gradient(circle at 20% 20%, rgba(87,214,255,.06), transparent 35%),
-        radial-gradient(circle at 80% 30%, rgba(124,255,178,.05), transparent 40%);
-      mix-blend-mode: overlay;
+          transparent 6px
+        );
       opacity:.35;
+      mix-blend-mode:overlay;
+      z-index:0;
     }
 
     .wrap{
-      max-width:1100px;
+      max-width:1120px;
       margin:0 auto;
-      padding:28px 16px 52px;
+      padding:28px 18px 56px;
       position:relative;
       z-index:1;
     }
 
-    header{
+    .content-scene{
+      position:relative;
+      isolation:isolate;
+    }
+
+    .hero{
       position:relative;
       border:1px solid var(--border);
-      border-radius:18px;
-      padding:18px 18px 16px;
-      background: linear-gradient(180deg, rgba(10,16,32,.82), rgba(10,16,32,.54));
-      box-shadow: var(--shadow);
+      border-radius:28px;
       overflow:hidden;
-    }
-    header:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background: linear-gradient(90deg, transparent 0%, rgba(87,214,255,.8) 35%, rgba(124,255,178,.7) 60%, transparent 100%);
-      filter: blur(10px);
-      opacity:.18;
-      transform: translateX(-60%);
-      animation: sweep 4.6s ease-in-out infinite;
-      pointer-events:none;
-    }
-    header:after{
-      content:"";
-      position:absolute; inset:0;
-      background: linear-gradient(135deg, rgba(255,255,255,.05) 1px, transparent 1px) 0 0/22px 22px;
-      opacity:.12;
-      pointer-events:none;
-    }
-    @keyframes sweep{
-      0%{transform: translateX(-70%);}
-      50%{transform: translateX(20%);}
-      100%{transform: translateX(-70%);}
-    }
-
-    .head-row{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      flex-wrap:wrap;
-      position:relative;
-    }
-    .brand{display:flex; align-items:center; gap:12px; min-width:260px;}
-    .logo{
-      width:46px; height:46px; border-radius:14px;
-      border:1px solid rgba(87,214,255,.35);
+      box-shadow:var(--shadow);
+      min-height:520px;
       background:
-        radial-gradient(circle at 30% 25%, rgba(87,214,255,.25), transparent 55%),
-        radial-gradient(circle at 70% 65%, rgba(124,255,178,.16), transparent 60%),
-        rgba(255,255,255,.03);
-      display:grid; place-items:center;
-      font-family:var(--mono);
-      color:var(--neon);
-      letter-spacing:.08em;
-      box-shadow: 0 0 0 6px rgba(87,214,255,.07);
-    }
-    .title{
-      margin:0;
-      font-size:16px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-    }
-    .subtitle{
-      margin-top:4px;
-      font-family:var(--mono);
-      font-size:12px;
-      color:var(--muted);
+        linear-gradient(180deg, rgba(8,14,28,.84), rgba(8,14,28,.68));
+      width:110%;
     }
 
-    .grid{
+    .hero::before,
+    .window::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(8,14,28,.70), rgba(8,14,28,.78)),
+        url("./res/aac.svg");
+      background-repeat:no-repeat, no-repeat;
+      background-size:
+        auto,
+        var(--art-w) auto;
+      background-position:
+        0 0,
+        calc(var(--art-left) - var(--win-x)) calc(var(--art-top) - var(--win-y));
+      opacity:.72;
+      filter:
+        brightness(.62)
+        saturate(.82)
+        drop-shadow(0 0 14px rgba(87,214,255,.05))
+        drop-shadow(0 0 24px rgba(124,255,178,.03));
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      background:
+        radial-gradient(480px 300px at 18% 18%, rgba(87,214,255,.10), transparent 60%),
+        radial-gradient(360px 260px at 82% 28%, rgba(124,255,178,.06), transparent 60%);
+    }
+
+    .hero-grid{
+      position:relative;
+      z-index:1;
       display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap:16px;
-      margin-top:16px;
+      grid-template-columns:1.1fr .9fr;
+      gap:28px;
+      align-items:center;
+      padding:42px 30px 36px;
     }
-    @media (max-width: 920px){ .grid{ grid-template-columns:1fr; } }
 
-    .card{
-      border:1px solid var(--border);
-      border-radius:18px;
-      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      padding:16px;
-      box-shadow: var(--shadow);
-    }
-    .card h2{
-      margin:0 0 10px;
-      font-size:13px;
-      letter-spacing:.14em;
+    .eyebrow{
+      display:inline-block;
+      margin-bottom:14px;
+      padding:7px 11px;
+      border-radius:999px;
+      border:1px solid rgba(87,214,255,.20);
+      background:rgba(87,214,255,.08);
+      font-family:var(--mono);
+      font-size:11px;
+      letter-spacing:.12em;
       text-transform:uppercase;
       color:#cfe3ff;
     }
 
-    .note{
-      font-family:var(--mono);
-      font-size:12px;
-      color:var(--muted);
-      line-height:1.65;
+    .hero h1{
+      margin:0;
+      font-size:clamp(34px, 7vw, 66px);
+      line-height:.97;
+      letter-spacing:.03em;
+      text-transform:uppercase;
+      max-width:10ch;
+      position:relative;
+      z-index:1;
     }
 
-    .alert{
-      margin-top:12px;
+    .hero p{
+      margin:18px 0 0;
+      max-width:680px;
+      font-family:var(--mono);
+      font-size:13px;
+      line-height:1.85;
+      color:var(--muted);
+      position:relative;
+      z-index:1;
+    }
+
+    .side-panel{
+      position:relative;
+      z-index:1;
+      border:1px solid var(--border);
+      border-radius:22px;
+      overflow:hidden;
+      background:rgba(6,10,22,.32);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+      padding:20px;
+    }
+
+    .side-panel > *{
+      position:relative;
+      z-index:1;
+    }
+
+    .side-panel h2{
+      margin:0 0 12px;
+      font-size:12px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:#d8e8ff;
+    }
+
+    .side-panel p{
+      margin:0;
+      font-family:var(--mono);
+      font-size:12px;
+      line-height:1.9;
+      color:var(--muted);
+    }
+
+    .mini-list{
+      margin:16px 0 0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:12px;
+    }
+
+    .mini-list li{
+      padding:12px 14px;
       border-radius:16px;
       border:1px solid var(--border);
-      background: rgba(255,255,255,.03);
-      padding:12px 12px;
+      background:rgba(0,0,0,.24);
       font-family:var(--mono);
       font-size:12px;
       color:var(--muted);
-    }
-    .alert.warn{
-      border-color: rgba(255,209,102,.25);
-      background: rgba(255,209,102,.10);
-    }
-    .alert b{ color: var(--text); }
-
-    .steps{
-      margin:10px 0 0;
-      padding-left:18px;
-      font-family:var(--mono);
-      font-size:12px;
-      color:var(--muted);
-      line-height:1.7;
-    }
-
-    .sections{
-      margin-top:12px;
-      display:grid;
-      gap:10px;
+      backdrop-filter:blur(4px);
+      -webkit-backdrop-filter:blur(4px);
     }
 
     .section{
+      margin-top:20px;
+      display:grid;
+      grid-template-columns:minmax(0, 780px) 1fr;
+      gap:24px;
+      align-items:start;
+      position:relative;
+      z-index:1;
+    }
+
+    .cards-col{
+      display:grid;
+      gap:18px;
+    }
+
+    .side-col{
+      display:grid;
+      gap:18px;
+      align-self:start;
+    }
+
+    .card{
+      position:relative;
+      width:100%;
       border:1px solid var(--border);
-      border-radius:16px;
-      background: rgba(0,0,0,.16);
-      padding:14px;
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      justify-content:space-between;
-      flex-wrap:wrap;
+      border-radius:22px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
     }
-    .section .meta{
-      min-width: 280px;
-      flex: 1;
+
+    .accent-top{
+      height:4px;
+      background:linear-gradient(90deg, rgba(87,214,255,.9), rgba(124,255,178,.7));
+      opacity:.9;
+      position:relative;
+      z-index:2;
     }
-    .section .name{
-      font-family:var(--mono);
-      font-size:12px;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      color: #cfe3ff;
-      margin:0;
+
+    .card-inner{
+      position:relative;
+      min-height:258px;
+      padding:24px;
+      background:rgba(8,14,28,.66);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+      overflow:hidden;
     }
-    .section .desc{
-      margin-top:6px;
-      font-family:var(--mono);
-      font-size:12px;
-      color:var(--muted);
-      line-height:1.6;
+
+    .card-inner > *{
+      position:relative;
+      z-index:1;
     }
-    .section .tags{
-      margin-top:8px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-    }
-    .tag{
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      padding:6px 9px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,.03);
+
+    .card-label{
       font-family:var(--mono);
       font-size:11px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
       color:var(--muted);
-      white-space:nowrap;
+      margin-bottom:10px;
     }
-    .tag.ok{ border-color: rgba(124,255,178,.25); background: rgba(124,255,178,.10); color: var(--neon2); }
-    .tag.info{ border-color: rgba(87,214,255,.25); background: rgba(87,214,255,.10); color: #bceeff; }
-    .tag.warn{ border-color: rgba(255,209,102,.25); background: rgba(255,209,102,.10); color: #ffe7a8; }
 
-    .actions{
+    .card h3{
+      margin:0;
+      font-size:30px;
+      line-height:1.08;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+
+    .card p{
+      margin:14px 0 0;
+      font-family:var(--mono);
+      font-size:12px;
+      line-height:1.8;
+      color:var(--muted);
+      max-width:56ch;
+    }
+
+    .card-actions{
+      margin-top:20px;
       display:flex;
       gap:10px;
-      align-items:center;
       flex-wrap:wrap;
-      justify-content:flex-end;
     }
 
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:6px;
-      font-family:var(--mono);
-      font-size:11px;
-      line-height:1;
-      padding:10px 12px;
-      border-radius:12px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,.04);
-      color:var(--text);
-      text-decoration:none;
-      white-space:nowrap;
-      cursor:pointer;
-      user-select:none;
-      transition: transform .08s ease, filter .12s ease, border-color .12s ease;
-    }
-    .btn.primary-blue{
-      border-color: rgba(87,214,255,.25);
-      background: rgba(87,214,255,.12);
-    }
-    .btn.primary-green{
-      border-color: rgba(80,255,170,.28);
-      background: rgba(80,255,170,.10);
-    }
-    .btn:hover{ filter: brightness(1.08); }
-    .btn:active{ transform: translateY(1px); }
-    .btn:focus-visible{
-      outline: 2px solid rgba(87,214,255,.55);
-      outline-offset: 2px;
-    }
-
-    .btn.hue:hover{
-      animation: hueSweep 1.6s linear infinite;
-      filter: brightness(1.12);
-    }
-    @keyframes hueSweep{
-      from{ filter: hue-rotate(0deg) brightness(1.12); }
-      to{ filter: hue-rotate(360deg) brightness(1.12); }
-    }
-
-    .small{
-      font-family:var(--mono);
-      font-size:11px;
-      color:var(--muted);
-      opacity:.95;
-    }
-
-    .hero{
-      margin-top:14px;
-      display:grid;
-      grid-template-columns: 1fr auto;
-      gap:16px;
-      align-items:end;
-    }
-    @media (max-width: 760px){
-      .hero{ grid-template-columns:1fr; }
-    }
-
-    .hero-copy h2{
-      margin:0 0 8px;
-      font-size:28px;
-      line-height:1.1;
-      letter-spacing:.04em;
-      text-transform:uppercase;
-      color:var(--text);
-    }
-    .hero-copy p{
-      margin:0;
-      font-family:var(--mono);
-      font-size:13px;
-      line-height:1.8;
-      color:var(--muted);
-      max-width:720px;
-    }
-
-    .status-box{
-      border:1px solid var(--border);
-      border-radius:16px;
-      background: rgba(255,255,255,.03);
+      gap:8px;
+      min-width:170px;
       padding:12px 14px;
-      min-width:240px;
-    }
-    .status-line{
+      border-radius:14px;
+      border:1px solid var(--border);
+      text-decoration:none;
+      color:var(--text);
       font-family:var(--mono);
       font-size:12px;
-      line-height:1.8;
-      color:var(--muted);
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      transition:transform .08s ease, filter .12s ease, border-color .12s ease;
+      background:rgba(255,255,255,.06);
+      backdrop-filter:blur(4px);
+      -webkit-backdrop-filter:blur(4px);
     }
-    .status-line b{ color:var(--text); }
 
-    code.inline{
-      font-family:var(--mono);
-      font-size:11px;
-      color:#cfe3ff;
-      background: rgba(0,0,0,.18);
+    .btn:hover{ filter:brightness(1.08); }
+    .btn:active{ transform:translateY(1px); }
+
+    .btn.primary{
+      border-color:rgba(87,214,255,.25);
+      background:rgba(87,214,255,.11);
+    }
+
+    .btn.secondary{
+      border-color:rgba(124,255,178,.24);
+      background:rgba(124,255,178,.10);
+    }
+
+    .info-card{
       border:1px solid var(--border);
-      border-radius:10px;
-      padding:2px 7px;
-      white-space:nowrap;
+      border-radius:22px;
+      background:rgba(8,14,28,.52);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+      box-shadow:var(--shadow);
+      padding:20px;
     }
 
-    footer{
-      margin-top:18px;
+    .info-card h4{
+      margin:0 0 12px;
+      font-family:var(--mono);
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#d8e8ff;
+    }
+
+    .info-card p,
+    .info-card li{
+      font-family:var(--mono);
+      font-size:12px;
+      line-height:1.85;
       color:var(--muted);
+    }
+
+    .info-card p{
+      margin:0;
+    }
+
+    .info-card ul{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .footer{
+      margin-top:18px;
+      padding:8px 2px 0;
       font-family:var(--mono);
       font-size:11px;
+      color:var(--muted);
       opacity:.9;
+    }
+
+    @media (max-width: 1100px){
+      .section{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 920px){
+      :root{
+        --art-w: 640px;
+        --art-top: 110px;
+        --art-left: -320px;
+      }
+
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero{
+        min-height:auto;
+      }
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <header>
-      <div class="head-row">
-        <div class="brand">
-          <div class="logo">CB</div>
+    <div class="content-scene">
+      <section class="hero window">
+        <div class="hero-grid">
           <div>
-            <h1 class="title">CYBERMAN // HW-CTF — 2026</h1>
-            <div class="subtitle">Portal // Documentation // Firmware Access</div>
+            <div class="eyebrow">Cyberman HW-CTF · 2026</div>
+            <h1>Capture the Flag, reimagined</h1>
+            <p>
+              This page is the public entry point for the 2026 Cyberman HW-CTF materials. From here, you can
+              access the event documentation and the browser-based firmware flasher for the Cyberman boards.
+            </p>
+            <p>
+              The exercise itself is hosted through the CERTMIL platform.
+            </p>
           </div>
-        </div>
 
-        <div class="small" id="portalStatus">Resolving portal state…</div>
-      </div>
-
-      <div class="hero">
-        <div class="hero-copy">
-          <h2>Hardware CTF gateway</h2>
-          <p>
-            Access the official 2026 event resources from this portal. Browse challenge documentation and board notes in the
-            <b>wiki</b>, or open the <b>web flasher</b> to install firmware images onto the Cyberman hardware.
-          </p>
-        </div>
-
-        <div class="status-box">
-          <div class="status-line">Edition: <b>2026</b></div>
-          <div class="status-line">Portal: <b id="portalState">ONLINE</b></div>
-          <div class="status-line">Routes: <b>2 AVAILABLE</b></div>
-        </div>
-      </div>
-
-      <div class="alert warn">
-        <b>Note:</b> The web flasher requires a <b>Chromium-based</b> browser if you want to use Web Serial directly from the browser.
-        The wiki can be opened from any modern browser.
-      </div>
-    </header>
-
-    <div class="grid">
-      <section class="card">
-        <h2>Portal overview</h2>
-        <div class="note">
-          This page is the entry point for the Cyberman HW-CTF 2026 resources. Use the routes on the right to either:
-        </div>
-
-        <div class="alert" style="margin-top:12px;">
-          <b>Available paths</b>
-          <ol class="steps">
-            <li>Open <code class="inline">./wiki/</code> for guides, documentation, hardware notes, and challenge support material.</li>
-            <li>Open <code class="inline">./flasher/</code> for firmware installation via browser.</li>
-            <li>Use the flasher with Chrome or Edge for Web Serial support.</li>
-            <li>Keep this landing page as the primary link in the repository README.</li>
-          </ol>
-        </div>
-
-        <div class="note" style="margin-top:12px;">
-          Recommended public entrypoint:
-          <code class="inline">https://cyberman-hw-ctf.github.io/2026/</code>
+          <aside class="side-panel">
+            <h2>Available resources</h2>
+            <p>
+              The documentation section includes guides, setup notes, and supporting material for participants.
+              The flasher provides a browser-based way to install compatible firmware images onto the event hardware.
+            </p>
+            <ul class="mini-list">
+              <li>Wiki: documentation, guides, board notes</li>
+              <li>Web flasher: firmware install for supported builds</li>
+              <li>Exercise platform: certmil.ro</li>
+            </ul>
+          </aside>
         </div>
       </section>
 
-      <aside class="card">
-        <h2>Routes</h2>
-        <div class="note">
-          Select a destination.
+      <section class="section">
+        <div class="cards-col">
+          <article class="card">
+            <div class="accent-top"></div>
+            <div class="card-inner window">
+              <div class="card-label">Documentation</div>
+              <h3>Wiki</h3>
+              <p>
+                Browse the project knowledge base, firmware instructions, hardware usage
+                references, event-specific documentation and how-to guides.
+              </p>
+              <div class="card-actions">
+                <a class="btn primary" href="./wiki/">Enter Wiki</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="accent-top"></div>
+            <div class="card-inner window">
+              <div class="card-label">Firmware</div>
+              <h3>Web Flasher</h3>
+              <p>
+                Open the browser-based flashing interface to install event firmware, diagnostics images,
+                or other supported builds for the Cyberman boards.
+              </p>
+              <div class="card-actions">
+                <a class="btn secondary" href="./flasher/">Open Flasher</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="accent-top"></div>
+            <div class="card-inner window">
+              <div class="card-label">Exercise Platform</div>
+              <h3>CERTMIL</h3>
+              <p>
+                Access the platform of the Cyber Agency that hosts the competition environment and related event infrastructure.
+              </p>
+              <div class="card-actions">
+                <a class="btn primary" href="https://certmil.ro/" target="_blank" rel="noopener noreferrer">Open certmil.ro</a>
+              </div>
+            </div>
+          </article>
         </div>
 
-        <div class="sections">
-          <div class="section">
-            <div class="meta">
-              <div class="name">Wiki / Documentation</div>
-              <div class="desc">
-                Event guides, hardware usage notes, firmware instructions, challenge-related documentation, and participant resources.
-              </div>
-              <div class="tags">
-                <span class="tag info">docs</span>
-                <span class="tag">guides</span>
-                <span class="tag">reference</span>
-              </div>
-            </div>
-            <div class="actions">
-              <a class="btn primary-blue hue" href="./wiki/">Open Wiki</a>
-            </div>
-          </div>
+        <aside class="side-col">
+          <article class="info-card">
+            <h4>What is this?</h4>
+            <p>
+              Cyberman HW-CTF is a hardware-focused challenge set built around a custom board, firmware interaction,
+              reverse engineering, and hands-on exploration. 
+            </p>
+          </article>
 
-          <div class="section">
-            <div class="meta">
-              <div class="name">Web Flasher</div>
-              <div class="desc">
-                Browser-based firmware installer for the ESP32-C3 platform, including event and tooling images.
-              </div>
-              <div class="tags">
-                <span class="tag ok">firmware</span>
-                <span class="tag">esp32-c3</span>
-                <span class="tag warn">web serial</span>
-              </div>
-            </div>
-            <div class="actions">
-              <a class="btn primary-green hue" href="./flasher/">Open Flasher</a>
-            </div>
-          </div>
-        </div>
-      </aside>
+          <article class="info-card">
+            <h4>Quick start</h4>
+            <ul>
+              <li>Connect the board to your PC</li>
+              <li>Browse the wiki for instructions</li>
+              <li>Flash the board if needed</li>
+            </ul>
+          </article>
+
+          <article class="info-card">
+            <h4>Requirements</h4>
+            <ul>
+              <li>Chromium browser for Web Serial Flasher</li>
+              <li>USB Type-C data cable</li>
+              <li>Cyberman board</li>
+            </ul>
+          </article>
+        </aside>
+      </section>
     </div>
 
-    <footer>
-      CYBERMAN HW-CTF · 2026 edition · Main portal for documentation and firmware distribution.
-    </footer>
+    <div class="footer">
+      CYBERMAN HW-CTF · 2026 · Main landing page
+    </div>
   </div>
 
   <script>
-    const isProjectPages = location.pathname.includes("/2026/");
-    const portalStatus = document.getElementById("portalStatus");
-    const portalState = document.getElementById("portalState");
+    function alignWindows() {
+      const scene = document.querySelector(".content-scene");
+      const windows = document.querySelectorAll(".window");
+      if (!scene) return;
 
-    if (isProjectPages) {
-      portalStatus.innerHTML = 'Project Pages route: <span style="color: var(--neon2); font-family: var(--mono);">OK</span>';
-      portalState.style.color = "var(--neon2)";
-    } else {
-      portalStatus.innerHTML = 'Project Pages route: <span style="color: var(--warn); font-family: var(--mono);">CHECK PATH</span>';
-      portalState.style.color = "var(--warn)";
-      portalState.textContent = "PATH CHECK";
+      const sceneRect = scene.getBoundingClientRect();
+      const scrollY = window.scrollY || window.pageYOffset || 0;
+      const parallax = scrollY * 0.18;
+
+      windows.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        const x = r.left - sceneRect.left;
+        const y = r.top - sceneRect.top;
+
+        el.style.setProperty("--win-x", `${x}px`);
+        el.style.setProperty("--win-y", `${y - parallax}px`);
+      });
     }
+
+    window.addEventListener("load", alignWindows);
+    window.addEventListener("resize", alignWindows);
+    window.addEventListener("scroll", alignWindows, { passive: true });
   </script>
 </body>
 </html>

@@ -1,2 +1,490 @@
-<a href="./wiki/">Wiki / Documentation</a>
-<a href="./flasher/">Web Flasher</a>
+<!doctype html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="./favicon.png" sizes="32x32">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CYBERMAN // HW-CTF — 2026</title>
+
+  <style>
+    :root{
+      --bg:#05070c;
+      --panel: rgba(10,16,32,.72);
+      --panel2: rgba(10,16,32,.46);
+      --text:#e8f0ff;
+      --muted:#9fb0d0;
+      --neon:#57d6ff;
+      --neon2:#7CFFB2;
+      --danger:#ff4d6d;
+      --warn:#ffd166;
+      --border: rgba(255,255,255,.10);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(900px 600px at 15% 10%, rgba(87,214,255,.18), transparent 55%),
+        radial-gradient(800px 520px at 85% 18%, rgba(124,255,178,.12), transparent 60%),
+        linear-gradient(180deg, #04060a, var(--bg));
+      overflow-x:hidden;
+    }
+
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background:
+        repeating-linear-gradient(180deg,
+          rgba(255,255,255,.03) 0px,
+          rgba(255,255,255,.03) 1px,
+          transparent 2px,
+          transparent 6px),
+        radial-gradient(circle at 20% 20%, rgba(87,214,255,.06), transparent 35%),
+        radial-gradient(circle at 80% 30%, rgba(124,255,178,.05), transparent 40%);
+      mix-blend-mode: overlay;
+      opacity:.35;
+    }
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:28px 16px 52px;
+      position:relative;
+      z-index:1;
+    }
+
+    header{
+      position:relative;
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:18px 18px 16px;
+      background: linear-gradient(180deg, rgba(10,16,32,.82), rgba(10,16,32,.54));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    header:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: linear-gradient(90deg, transparent 0%, rgba(87,214,255,.8) 35%, rgba(124,255,178,.7) 60%, transparent 100%);
+      filter: blur(10px);
+      opacity:.18;
+      transform: translateX(-60%);
+      animation: sweep 4.6s ease-in-out infinite;
+      pointer-events:none;
+    }
+    header:after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(135deg, rgba(255,255,255,.05) 1px, transparent 1px) 0 0/22px 22px;
+      opacity:.12;
+      pointer-events:none;
+    }
+    @keyframes sweep{
+      0%{transform: translateX(-70%);}
+      50%{transform: translateX(20%);}
+      100%{transform: translateX(-70%);}
+    }
+
+    .head-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      position:relative;
+    }
+    .brand{display:flex; align-items:center; gap:12px; min-width:260px;}
+    .logo{
+      width:46px; height:46px; border-radius:14px;
+      border:1px solid rgba(87,214,255,.35);
+      background:
+        radial-gradient(circle at 30% 25%, rgba(87,214,255,.25), transparent 55%),
+        radial-gradient(circle at 70% 65%, rgba(124,255,178,.16), transparent 60%),
+        rgba(255,255,255,.03);
+      display:grid; place-items:center;
+      font-family:var(--mono);
+      color:var(--neon);
+      letter-spacing:.08em;
+      box-shadow: 0 0 0 6px rgba(87,214,255,.07);
+    }
+    .title{
+      margin:0;
+      font-size:16px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+    .subtitle{
+      margin-top:4px;
+      font-family:var(--mono);
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:16px;
+      margin-top:16px;
+    }
+    @media (max-width: 920px){ .grid{ grid-template-columns:1fr; } }
+
+    .card{
+      border:1px solid var(--border);
+      border-radius:18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      padding:16px;
+      box-shadow: var(--shadow);
+    }
+    .card h2{
+      margin:0 0 10px;
+      font-size:13px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#cfe3ff;
+    }
+
+    .note{
+      font-family:var(--mono);
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.65;
+    }
+
+    .alert{
+      margin-top:12px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      padding:12px 12px;
+      font-family:var(--mono);
+      font-size:12px;
+      color:var(--muted);
+    }
+    .alert.warn{
+      border-color: rgba(255,209,102,.25);
+      background: rgba(255,209,102,.10);
+    }
+    .alert b{ color: var(--text); }
+
+    .steps{
+      margin:10px 0 0;
+      padding-left:18px;
+      font-family:var(--mono);
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .sections{
+      margin-top:12px;
+      display:grid;
+      gap:10px;
+    }
+
+    .section{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background: rgba(0,0,0,.16);
+      padding:14px;
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .section .meta{
+      min-width: 280px;
+      flex: 1;
+    }
+    .section .name{
+      font-family:var(--mono);
+      font-size:12px;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      color: #cfe3ff;
+      margin:0;
+    }
+    .section .desc{
+      margin-top:6px;
+      font-family:var(--mono);
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .section .tags{
+      margin-top:8px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .tag{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding:6px 9px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      font-family:var(--mono);
+      font-size:11px;
+      color:var(--muted);
+      white-space:nowrap;
+    }
+    .tag.ok{ border-color: rgba(124,255,178,.25); background: rgba(124,255,178,.10); color: var(--neon2); }
+    .tag.info{ border-color: rgba(87,214,255,.25); background: rgba(87,214,255,.10); color: #bceeff; }
+    .tag.warn{ border-color: rgba(255,209,102,.25); background: rgba(255,209,102,.10); color: #ffe7a8; }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      font-family:var(--mono);
+      font-size:11px;
+      line-height:1;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color:var(--text);
+      text-decoration:none;
+      white-space:nowrap;
+      cursor:pointer;
+      user-select:none;
+      transition: transform .08s ease, filter .12s ease, border-color .12s ease;
+    }
+    .btn.primary-blue{
+      border-color: rgba(87,214,255,.25);
+      background: rgba(87,214,255,.12);
+    }
+    .btn.primary-green{
+      border-color: rgba(80,255,170,.28);
+      background: rgba(80,255,170,.10);
+    }
+    .btn:hover{ filter: brightness(1.08); }
+    .btn:active{ transform: translateY(1px); }
+    .btn:focus-visible{
+      outline: 2px solid rgba(87,214,255,.55);
+      outline-offset: 2px;
+    }
+
+    .btn.hue:hover{
+      animation: hueSweep 1.6s linear infinite;
+      filter: brightness(1.12);
+    }
+    @keyframes hueSweep{
+      from{ filter: hue-rotate(0deg) brightness(1.12); }
+      to{ filter: hue-rotate(360deg) brightness(1.12); }
+    }
+
+    .small{
+      font-family:var(--mono);
+      font-size:11px;
+      color:var(--muted);
+      opacity:.95;
+    }
+
+    .hero{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap:16px;
+      align-items:end;
+    }
+    @media (max-width: 760px){
+      .hero{ grid-template-columns:1fr; }
+    }
+
+    .hero-copy h2{
+      margin:0 0 8px;
+      font-size:28px;
+      line-height:1.1;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      color:var(--text);
+    }
+    .hero-copy p{
+      margin:0;
+      font-family:var(--mono);
+      font-size:13px;
+      line-height:1.8;
+      color:var(--muted);
+      max-width:720px;
+    }
+
+    .status-box{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background: rgba(255,255,255,.03);
+      padding:12px 14px;
+      min-width:240px;
+    }
+    .status-line{
+      font-family:var(--mono);
+      font-size:12px;
+      line-height:1.8;
+      color:var(--muted);
+    }
+    .status-line b{ color:var(--text); }
+
+    code.inline{
+      font-family:var(--mono);
+      font-size:11px;
+      color:#cfe3ff;
+      background: rgba(0,0,0,.18);
+      border:1px solid var(--border);
+      border-radius:10px;
+      padding:2px 7px;
+      white-space:nowrap;
+    }
+
+    footer{
+      margin-top:18px;
+      color:var(--muted);
+      font-family:var(--mono);
+      font-size:11px;
+      opacity:.9;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="head-row">
+        <div class="brand">
+          <div class="logo">CB</div>
+          <div>
+            <h1 class="title">CYBERMAN // HW-CTF — 2026</h1>
+            <div class="subtitle">Portal // Documentation // Firmware Access</div>
+          </div>
+        </div>
+
+        <div class="small" id="portalStatus">Resolving portal state…</div>
+      </div>
+
+      <div class="hero">
+        <div class="hero-copy">
+          <h2>Hardware CTF gateway</h2>
+          <p>
+            Access the official 2026 event resources from this portal. Browse challenge documentation and board notes in the
+            <b>wiki</b>, or open the <b>web flasher</b> to install firmware images onto the Cyberman hardware.
+          </p>
+        </div>
+
+        <div class="status-box">
+          <div class="status-line">Edition: <b>2026</b></div>
+          <div class="status-line">Portal: <b id="portalState">ONLINE</b></div>
+          <div class="status-line">Routes: <b>2 AVAILABLE</b></div>
+        </div>
+      </div>
+
+      <div class="alert warn">
+        <b>Note:</b> The web flasher requires a <b>Chromium-based</b> browser if you want to use Web Serial directly from the browser.
+        The wiki can be opened from any modern browser.
+      </div>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Portal overview</h2>
+        <div class="note">
+          This page is the entry point for the Cyberman HW-CTF 2026 resources. Use the routes on the right to either:
+        </div>
+
+        <div class="alert" style="margin-top:12px;">
+          <b>Available paths</b>
+          <ol class="steps">
+            <li>Open <code class="inline">./wiki/</code> for guides, documentation, hardware notes, and challenge support material.</li>
+            <li>Open <code class="inline">./flasher/</code> for firmware installation via browser.</li>
+            <li>Use the flasher with Chrome or Edge for Web Serial support.</li>
+            <li>Keep this landing page as the primary link in the repository README.</li>
+          </ol>
+        </div>
+
+        <div class="note" style="margin-top:12px;">
+          Recommended public entrypoint:
+          <code class="inline">https://cyberman-hw-ctf.github.io/2026/</code>
+        </div>
+      </section>
+
+      <aside class="card">
+        <h2>Routes</h2>
+        <div class="note">
+          Select a destination.
+        </div>
+
+        <div class="sections">
+          <div class="section">
+            <div class="meta">
+              <div class="name">Wiki / Documentation</div>
+              <div class="desc">
+                Event guides, hardware usage notes, firmware instructions, challenge-related documentation, and participant resources.
+              </div>
+              <div class="tags">
+                <span class="tag info">docs</span>
+                <span class="tag">guides</span>
+                <span class="tag">reference</span>
+              </div>
+            </div>
+            <div class="actions">
+              <a class="btn primary-blue hue" href="./wiki/">Open Wiki</a>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="meta">
+              <div class="name">Web Flasher</div>
+              <div class="desc">
+                Browser-based firmware installer for the ESP32-C3 platform, including event and tooling images.
+              </div>
+              <div class="tags">
+                <span class="tag ok">firmware</span>
+                <span class="tag">esp32-c3</span>
+                <span class="tag warn">web serial</span>
+              </div>
+            </div>
+            <div class="actions">
+              <a class="btn primary-green hue" href="./flasher/">Open Flasher</a>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      CYBERMAN HW-CTF · 2026 edition · Main portal for documentation and firmware distribution.
+    </footer>
+  </div>
+
+  <script>
+    const isProjectPages = location.pathname.includes("/2026/");
+    const portalStatus = document.getElementById("portalStatus");
+    const portalState = document.getElementById("portalState");
+
+    if (isProjectPages) {
+      portalStatus.innerHTML = 'Project Pages route: <span style="color: var(--neon2); font-family: var(--mono);">OK</span>';
+      portalState.style.color = "var(--neon2)";
+    } else {
+      portalStatus.innerHTML = 'Project Pages route: <span style="color: var(--warn); font-family: var(--mono);">CHECK PATH</span>';
+      portalState.style.color = "var(--warn)";
+      portalState.textContent = "PATH CHECK";
+    }
+  </script>
+</body>
+</html>

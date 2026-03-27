@@ -1,0 +1,121 @@
+/* Compact tables in docs */
+.md-typeset table {
+  font-size: 0.88em;
+}
+
+.md-typeset table td,
+.md-typeset table th {
+  padding: 0.25em 0.55em;   /* tighter cell padding */
+  vertical-align: middle;
+}
+
+.chip {
+  display: inline-block;
+  padding: 0.1em 0.55em;
+  border-radius: 0.6em;   /* smooth corners */
+  font-size: 0.85em;
+  line-height: 1.6;
+  font-weight: 600;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.chip-red  { background: #d32f2f; color: #fff; }
+.chip-blue { background: #1976d2; color: #fff; }
+.chip-light-green { background: #B7E4C7; color: #0B2E13; }
+.chip-light-mustard-yellow { background: #F6E27F; color: #3A2A00; }
+.chip-china-green { background: #2E8B57; color: #FFFFFF; }
+.chip-mustard-yellow { background: #D4A017; color: #1F1600; }
+.chip-gray { background: #6B7280; color: #FFFFFF; }
+.chip-light-blue { background: #A7D8FF; color: #00223A; }
+
+/* PWM squiggle marker */
+.pwm {
+  display: inline-block;
+  padding: 0.05em 0.35em;
+  margin-right: 0.35em;
+  border-radius: 0.45em;
+  font-size: 0.85em;
+  line-height: 1.2;
+  font-weight: 800;
+  opacity: 0.85;
+  /* neutral look that fits both themes */
+  background: rgba(127, 127, 127, 0.18);
+}
+
+/* Use a nice squiggle character */
+.pwm::before {
+  content: "∿";
+}
+
+/* The hover target (hitbox) */
+.tip{
+  position:relative;
+  display:inline-flex;
+  align-items:baseline;
+  gap:4px;
+
+  /* extend hitbox */
+  padding:2px 4px;
+  margin:-2px -4px; /* keeps layout the same while hitbox grows */
+  border-radius:6px;
+}
+
+/* The little ? badge */
+.tip-mark{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  width:12px;
+  height:12px;
+  border-radius:999px;
+
+  font-size:9px;
+  line-height:1;
+  font-weight:700;
+
+  color: rgba(120,120,120,0.95);
+  border: 1px solid rgba(140,140,140,0.75);
+  background: rgba(0,0,0,0.03);
+
+  /* superscript-ish positioning */
+  transform: translateY(-0.35em);
+}
+
+/* Tooltip bubble */
+.tip::after{
+  content: attr(data-tip);
+  position:absolute;
+  left:50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%);
+
+  white-space:normal;
+  width:max-content;
+  max-width:260px;
+
+  padding:6px 8px;
+  border-radius:8px;
+  font-size:12px;
+  font-weight:500;
+
+  background: rgba(30,30,30,.96);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(0,0,0,.25);
+
+  opacity:0;
+  pointer-events:none;
+  transition: opacity .12s ease;
+  z-index: 50;
+}
+
+/* Show tooltip when hovering anywhere on the wrapped text */
+.tip:hover::after{
+  opacity:1;
+}
+
+/* Optional: subtle hover affordance for the whole target */
+.tip:hover{
+  background: rgba(0,0,0,0.03);
+}

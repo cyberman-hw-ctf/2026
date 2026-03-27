@@ -1,0 +1,1029 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+        <link rel="next" href="./firmware_re/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="./assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.24">
+    
+    
+      
+        <title>Cyberman HW CTF Documentation - ESP32-C3 Custom Board</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="./assets/stylesheets/modern/main.28978c9b.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="./assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="./stylesheets/extra.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,a=__md_scope)=>JSON.parse(t.getItem(a.pathname+"."+e)),__md_set=(e,t,a=localStorage,_=__md_scope)=>{try{a.setItem(_.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cyberman-hw-ctf-documentation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="" title="ESP32-C3 Custom Board" class="md-header__button md-logo" aria-label="ESP32-C3 Custom Board" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ESP32-C3 Custom Board
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cyberman HW CTF Documentation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="deep-orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="deep-orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="" class="md-tabs__link">
+        
+  
+  Cyberman HW CTF Documentation
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="./firmware_re/" class="md-tabs__link">
+        
+  
+  ESP32-C3 Firmware Extraction and Reverse Engineering
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="./micropython_guide/" class="md-tabs__link">
+        
+  
+  MicroPython on the ESP32-C3
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="" title="ESP32-C3 Custom Board" class="md-nav__button md-logo" aria-label="ESP32-C3 Custom Board" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    ESP32-C3 Custom Board
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cyberman HW CTF Documentation
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cyberman HW CTF Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cyberman-hw-ctf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚩 Cyberman HW CTF
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚩 Cyberman HW CTF">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rules-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rules &amp; Scope
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serial-connection-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serial Connection Guide
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hardware-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚙️ Hardware Reference
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚙️ Hardware Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#board-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Board Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pinout-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pinout &amp; Interfaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#schematics-pcb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schematics &amp; PCB
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💻 Firmware
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="💻 Firmware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#web-flasher" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Web Flasher
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📥 Resources
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📥 Resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#downloads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Downloads
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./firmware_re/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ESP32-C3 Firmware Extraction and Reverse Engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./micropython_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MicroPython on the ESP32-C3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cyberman-hw-ctf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚩 Cyberman HW CTF
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚩 Cyberman HW CTF">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getting-started-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting Started (Setup)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rules-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rules &amp; Scope
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serial-connection-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serial Connection Guide
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hardware-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚙️ Hardware Reference
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚙️ Hardware Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#board-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Board Overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pinout-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pinout &amp; Interfaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#schematics-pcb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schematics &amp; PCB
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💻 Firmware
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="💻 Firmware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#web-flasher" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Web Flasher
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📥 Resources
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📥 Resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#downloads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Downloads
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+
+<h1 id="cyberman-hw-ctf-documentation">Cyberman HW CTF Documentation<a class="headerlink" href="#cyberman-hw-ctf-documentation" title="Permanent link">&para;</a></h1>
+<p>Welcome to <strong>Cyberman Hardware CTF</strong>! </p>
+<p>This page serves as your complete documentation for the custom ESP32-C3 badge provided during the event. Use the CTF and Hardware Reference sections to help you hunt for flags. Once the event concludes, this board is yours to keep, and you can flash it with custom firmware.</p>
+<p><img alt="Cyberman CTF Banner" src="assets/cyberman.svg" /></p>
+<hr />
+<h2 id="cyberman-hw-ctf">🚩 Cyberman HW CTF<a class="headerlink" href="#cyberman-hw-ctf" title="Permanent link">&para;</a></h2>
+<h3 id="getting-started-setup">Getting Started (Setup)<a class="headerlink" href="#getting-started-setup" title="Permanent link">&para;</a></h3>
+<p>Follow these steps to power up your Cyberman board and verify it is functioning correctly before the CTF begins.</p>
+<ol>
+<li><strong>Unbox the Board:</strong> Inspect the PCB for any physical damage.</li>
+<li><strong>Power It Up:</strong> Connect the board to your device using the provided <strong>USB Type-A to Type-C data cable</strong>. </li>
+<li><strong>Verify Status:</strong> You should see the LEDs pulse Red, indicating the CTF is loaded. If not, then the CTF needs to be loaded.</li>
+<li><strong>Flash the Board (<em>OPTIONAL</em>):</strong> Use the Web Flasher at HTTPS://WEB_FLASHER_URL to flash the board with the latest version of the CTF. </li>
+</ol>
+<p><em>If your board does not power on, please notify a CTF admin immediately.</em></p>
+<div style="text-align: center; margin: 2rem 0;">
+  <model-viewer 
+    src="assets/pcb.glb" 
+    alt="A 3D model of the Cyberman ESP32-C3 PCB" 
+    auto-rotate 
+    camera-controls 
+    shadow-intensity="1"
+    style="width: 100%; height: 400px; background-color: #1e1e1e; border-radius: 8px;">
+  </model-viewer>
+  <p><em>Click and drag to rotate the board. Scroll to zoom.</em></p>
+</div>
+
+<h3 id="rules-scope">Rules &amp; Scope<a class="headerlink" href="#rules-scope" title="Permanent link">&para;</a></h3>
+<p>Please read these rules carefully. Violating the scope of the CTF may result in disqualification.</p>
+<ul>
+<li><strong>In Scope:</strong> Extracting firmware, analyzing serial output, intercepting I2C/SPI traffic on the exposed headers, and side-channel attacks on the ESP32-C3.</li>
+<li><strong>Out of Scope:</strong> Attacking the CTF infrastructure (scoring server, this documentation site), physical destruction of the board (delidding the ESP32-C3 is not required or allowed).</li>
+</ul>
+<p><strong>Flag Format:</strong>
+All flags in this hardware CTF follow the standard format: <code>cyberman{some_l33t_text_here}</code>
+Submit all flags to the scoring server at: <code>[INSERT SCORING SERVER URL]</code></p>
+<h3 id="serial-connection-guide">Serial Connection Guide<a class="headerlink" href="#serial-connection-guide" title="Permanent link">&para;</a></h3>
+<p>The primary way to interact with the Cyberman board during the CTF is via UART. You may use <code>PuTTY</code>, <code>screen</code>, or <code>minicom</code> for this.</p>
+<ul>
+<li><strong>Baud Rate:</strong> <code>[115200]</code></li>
+<li><strong>Data Bits:</strong> 8</li>
+<li><strong>Parity:</strong> None</li>
+<li><strong>Stop Bits:</strong> 1</li>
+</ul>
+<p>The ESP32-C3 features built-in USB-to-JTAG/Serial. Simply plugging the USB-C cable into your computer should expose a <code>COM</code> port (Windows) or <code>/dev/ttyACM</code> (Linux) / <code>/dev/cu.usbmodem</code> (macOS).</p>
+<p>Use a terminal emulator like <code>PuTTY</code>, <code>screen</code>, or <code>minicom</code>:
+<code>screen /dev/ttyACM0 115200</code></p>
+<hr />
+<h2 id="hardware-reference">⚙️ Hardware Reference<a class="headerlink" href="#hardware-reference" title="Permanent link">&para;</a></h2>
+<h3 id="board-overview">Board Overview<a class="headerlink" href="#board-overview" title="Permanent link">&para;</a></h3>
+<p>The official badge and target board for the 1st Edition of the Cyberman HW CTF. </p>
+<p><img alt="Cyberman HW CTF Board Front" src="assets/front.png" />
+<em>Front View</em></p>
+<p><strong>Specifications:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Resource</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>SoC</strong></td>
+<td style="text-align: left;">ESP32-C3 (Single-core 32-bit RISC-V @ 160 MHz)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Wireless</strong></td>
+<td style="text-align: left;">2.4 GHz Wi-Fi (802.11 b/g/n) &amp; Bluetooth 5 (LE)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Memory</strong></td>
+<td style="text-align: left;">400 KB SRAM, 4 MB embedded Flash</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Power</strong></td>
+<td style="text-align: left;">5V via USB-C, regulated to 3.3V</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pinout-interfaces">Pinout &amp; Interfaces<a class="headerlink" href="#pinout-interfaces" title="Permanent link">&para;</a></h3>
+<p>Below is the specific GPIO routing for the Cyberman CTF board.</p>
+<p><img alt="Cyberman HW CTF Board Front" src="assets/pinout.png" /></p>
+<p><strong>Board Pinout:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">GPIO</th>
+<th>Board function</th>
+<th>Usage</th>
+<th>Constraints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">0</td>
+<td>–</td>
+<td><span class="pwm"></span><span class="chip chip-mustard-yellow">ADC1_CH0</span>, <span class="chip chip-gray">XTAL_32K_P</span></td>
+<td>–</td>
+</tr>
+<tr>
+<td style="text-align: right;">1</td>
+<td>–</td>
+<td><span class="pwm"></span><span class="chip chip-mustard-yellow">ADC1_CH1</span>, <span class="chip chip-gray">XTAL_32K_N</span></td>
+<td>–</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td>–</td>
+<td><span class="pwm"></span><span class="chip chip-mustard-yellow">ADC1_CH2</span>, <span class="chip chip-red">BOOT</span></td>
+<td>Pull-up 10k</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td>–</td>
+<td><span class="pwm"></span><span class="chip chip-mustard-yellow">ADC1_CH3</span></td>
+<td>–</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td>–</td>
+<td><span class="pwm"></span><span class="chip chip-mustard-yellow">ADC1_CH4</span>, <span class="chip chip-blue">MTMS</span></td>
+<td>–</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td>WS2812 LED interface</td>
+<td><span class="pwm"></span><span class="chip chip-mustard-yellow">ADC2_CH0</span>, <span class="chip chip-blue">MTDI</span></td>
+<td>–</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td>–</td>
+<td><span class="pwm"></span><span class="chip chip-blue">MTCK</span></td>
+<td>–</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td>–</td>
+<td><span class="pwm"></span><span class="chip chip-blue">MTDO</span></td>
+<td>–</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td>–</td>
+<td><span class="pwm"></span><span class="chip chip-red">LOG</span></td>
+<td>Pull-up 10k</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td>–</td>
+<td><span class="pwm"></span><span class="chip chip-red">BOOT</span></td>
+<td>Pull-up 10k</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td>–</td>
+<td><span class="pwm"></span></td>
+<td>–</td>
+</tr>
+<tr>
+<td style="text-align: right;">18</td>
+<td>USB D−</td>
+<td><span class="pwm"></span><span class="chip chip-red">USB/JTAG</span></td>
+<td>Used for USB/JTAG, don’t use</td>
+</tr>
+<tr>
+<td style="text-align: right;">19</td>
+<td>USB D+</td>
+<td><span class="pwm"></span><span class="chip chip-red">USB/JTAG</span></td>
+<td>Used for USB/JTAG, don’t use</td>
+</tr>
+<tr>
+<td style="text-align: right;">20</td>
+<td>UART0 RX Header</td>
+<td><span class="pwm"></span><span class="chip chip-light-blue">UART0RX</span></td>
+<td>–</td>
+</tr>
+<tr>
+<td style="text-align: right;">21</td>
+<td>UART0 TX Header</td>
+<td><span class="pwm"></span><span class="chip chip-light-blue">UART0TX</span></td>
+<td>–</td>
+</tr>
+</tbody>
+</table>
+<p>All of the pins that can be interfaced with are <span class="pwm"> PWM-capable</span>.</p>
+<h3 id="schematics-pcb">Schematics &amp; PCB<a class="headerlink" href="#schematics-pcb" title="Permanent link">&para;</a></h3>
+<p>Use these schematics to trace signals and identify attack vectors during the CTF. </p>
+<iframe src="assets/schematic.pdf" width="100%" height="600px" style="border: 1px solid #ccc;">
+    <p>Your browser does not support PDFs. <a href="assets/schematic.pdf">Download the PDF</a>.</p>
+</iframe>
+
+<hr />
+<h2 id="firmware">💻 Firmware<a class="headerlink" href="#firmware" title="Permanent link">&para;</a></h2>
+<p>The firmware will not be released as source code, however the diagnostics will be. If you really want to dig up on the firmware, there's <a href="firmware_re/"><em>this page</em></a> which will help you understand more about this board, and perhaps you'll uncover the last 2 <strong>secret</strong> flags.</p>
+<h3 id="web-flasher">Web Flasher<a class="headerlink" href="#web-flasher" title="Permanent link">&para;</a></h3>
+<p>Now that the CTF is over, the board is yours! We have provided an online Web Flasher tool so you can easily install custom, general-purpose firmware (like WLED, MicroPython, or standard AT commands) directly from your browser.</p>
+<p>👉 <strong><a href="[external url _*INCOMING*_]">Launch the Cyberman Web Flasher</a></strong></p>
+<p><em>Note: You must use a Web Serial compatible browser (like Chrome or Edge). Ensure your board is plugged in via USB-C, click the link above, and follow the on-screen instructions.</em></p>
+<hr />
+<h2 id="resources">📥 Resources<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h2>
+<h3 id="downloads">Downloads<a class="headerlink" href="#downloads" title="Permanent link">&para;</a></h3>
+<p>Here are all the raw files for the Cyberman ESP32-C3 board for your own hacking and engineering needs.</p>
+<ul>
+<li><a href="assets/schematic.pdf">⬇️ Schematic (.pdf)</a></li>
+<li><a href="https://documentation.espressif.com/esp32-c3_datasheet_en.pdf">⬇️ ESP32-C3 Datasheet (.pdf)</a></li>
+<li><a href="pcb/gerbers.zip">⬇️ PCB Gerber Files (.zip)</a></li>
+<li><a href="pcb/pcb.zip">⬇️ KiCAD Source Files (.zip)</a></li>
+<li><a href="assets/bumper.zip">⬇️ Bumper 3D Models (.zip)</a></li>
+<li><a href="">⬇️ Original CTF Firmware Binaries (.zip)</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":".","features":["search.suggest","search.highlight","navigation.tabs","navigation.top"],"search":"./assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="./assets/javascripts/bundle.16f8adc2.min.js"></script>
+      
+    
+  </body>
+</html>

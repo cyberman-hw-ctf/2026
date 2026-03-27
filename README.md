@@ -1,12 +1,12 @@
-# Cyberman HW CTF
+# Cyberman HW CTF 2026
 
-Official project website: [cyberman-hw-ctf.github.io](https://cyberman-hw-ctf.github.io/)
+Project website: [Cyberman HW CTF 2026](https://cyberman-hw-ctf.github.io/2026/)
 
 ## Sections
-- [Wiki / Documentation](https://cyberman-hw-ctf.github.io/wiki/)
-- [Web Flasher](https://cyberman-hw-ctf.github.io/flasher/)
+- [Wiki / Documentation](https://cyberman-hw-ctf.github.io/2026/wiki/)
+- [Web Flasher](https://cyberman-hw-ctf.github.io/2026/flasher/)
 
-## Structure
+## Repository structure
 - `index.html` — landing page
-- `wiki/` — documentation site export
-- `flasher/` — browser flasher
+- `wiki/` — documentation and guides
+- `flasher/` — browser-based firmware flasher

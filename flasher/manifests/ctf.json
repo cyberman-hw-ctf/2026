@@ -8,7 +8,9 @@
       "parts": [
         { "path": "../firmware/ctf/bootloader.bin", "offset": 0 },
         { "path": "../firmware/ctf/partitions.bin", "offset": 32768 },
-        { "path": "../firmware/ctf/firmware.bin", "offset": 65536 }
+        { "path": "../firmware/ctf/firmware.bin", "offset": 65536 },
+        { "path": "../firmware/ctf/storage.bin", "offset": 2228224 },
+        { "path": "../firmware/ctf/storage_recovery.bin", "offset": 3276800 }
       ]
     }
   ]

@@ -786,85 +786,70 @@ This guide shows how to:</p>
 <li>Upload Python scripts</li>
 <li>Run code automatically on boot</li>
 </ol>
-<p><img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANUlEQVR4nO3OMQ2AABAAsSNBCkLfE07YGfHAiAU2QtIq6DIzW7UHAMBfnGt1V8fXEwAAXrse4eQF6VhvmPsAAAAASUVORK5CYII=" /></p>
 <h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>mpremote
 mpremote<span class="w"> </span>connect<span class="w"> </span>auto<span class="w"> </span>fs<span class="w"> </span>ls
 mpremote<span class="w"> </span>connect<span class="w"> </span>auto<span class="w"> </span>fs<span class="w"> </span>cp<span class="w"> </span>main.py<span class="w"> </span>:main.py
 mpremote<span class="w"> </span>connect<span class="w"> </span>auto<span class="w"> </span>reset<span class="w"> </span>
 </code></pre></div>
-<p><img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANUlEQVR4nO3OMQ2AABAAsSNBCkLfE07YGfHAiAU2QtIq6DIzW7UHAMBfnGt1V8fXEwAAXrse4eQF6VhvmPsAAAAASUVORK5CYII=" /></p>
-<p>What you need
+<p>What you will need:
 - The ESP32-C3 board
 - USB cable with data support
 - Computer with Python installed
-- Serial-capable USB port
-<img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANElEQVR4nO3OMQ0AIAwAwZIgBKn1gjJ0dGHBABMhuZt+/JaZIyJmAADwi9VP1NMNAABu1AaeoAUgyymsVwAAAABJRU5ErkJggg==" /></p>
+- Serial-capable USB port</p>
 <h2 id="1-flash-micropython">1. Flash MicroPython<a class="headerlink" href="#1-flash-micropython" title="Permanent link">&para;</a></h2>
 <p>If the board is already flashed with MicroPython, you can skip this
  
  step.
-Flash the MicroPython firmware from the web serial or from the official website.
-<img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANElEQVR4nO3OQQmAABRAsaeILbwZ9Fewo0Gs4E2ELcGWmTmqKwAA/uLeqr06v54AAPDa+gAthwNEfGhnhAAAAABJRU5ErkJggg==" /></p>
+Flash the MicroPython firmware from the web serial or from the official website.</p>
 <h2 id="2-install-the-required-tool">2. Install the required tool<a class="headerlink" href="#2-install-the-required-tool" title="Permanent link">&para;</a></h2>
 <p>Download <code>mpremote</code>, which is the standard MicroPython command-line tool.</p>
 <p><code>pip install mpremote</code></p>
-<p><img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANUlEQVR4nO3OQQ2AQBAAsSHhiQI0IWp9ngBsYIEfIWkVdJuZs5oAAPiLe6+O6vp6AgDAa+sBhYwEOqBD7p8AAAAASUVORK5CYII=" /></p>
 <h2 id="3-find-the-serial-port">3. Find the serial port<a class="headerlink" href="#3-find-the-serial-port" title="Permanent link">&para;</a></h2>
 <p>Typical serial device names:
 - Linux:/dev/ttyACM0 or /dev/ttyUSB0
 - macOS:/dev/cu.usbmodem...
-- Windows:COM3, COM4, etc.
-Test connection:
-<code>mpremote connect auto fs ls</code>
-If needed, specify manually:
-<code>mpremote connect /dev/ttyACM0 fs ls</code></p>
-<p><img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANUlEQVR4nO3OMQ2AABAAsSNBCkLfE07YGfHAiAU2QtIq6DIzW7UHAMBfnGt1V8fXEwAAXrse4eQF6VhvmPsAAAAASUVORK5CYII=" /></p>
+- Windows:COM3, COM4, etc.</p>
+<p>Test connection:</p>
+<p><code>mpremote connect auto fs ls</code></p>
+<p>If needed, specify manually:</p>
+<p><code>mpremote connect /dev/ttyACM0 fs ls</code></p>
 <h2 id="4-open-the-micropython-repl">4. Open the MicroPython REPL<a class="headerlink" href="#4-open-the-micropython-repl" title="Permanent link">&para;</a></h2>
 <p><code>mpremote connect auto repl</code></p>
 <p>Example:
 <code>print("Hello from ESP32-C3")</code></p>
 <p>Exit REPL with:
 <code>Ctrl+]</code></p>
-<p><img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANUlEQVR4nO3OMQ2AUBBAsUfyNTCi9VwgEA3sWGAjJK2CbjNzVGcAAPzFtapV7V9PAAB47X4AEW4ELQDBN+AAAAAASUVORK5CYII=" /></p>
 <h2 id="5-upload-a-script">5. Upload a script<a class="headerlink" href="#5-upload-a-script" title="Permanent link">&para;</a></h2>
 <p>Example blink.py:
 <code>mpremote connect auto fs cp blink.py :blink.py</code>
  
 The <code>:</code> means the device filesystem.</p>
-<p><img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANklEQVR4nO3OMQ2AABAAsSNhRAF+8PUDLhGADSywEZJWQZeZ2aszAAD+4l6rrTq+ngAA8Nr1AI9pBDeR/auUAAAAAElFTkSuQmCC" /></p>
 <h2 id="6-run-a-script-without-saving">6. Run a script without saving<a class="headerlink" href="#6-run-a-script-without-saving" title="Permanent link">&para;</a></h2>
 <p>mpremote connect auto run blink.py
- 
-<img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANklEQVR4nO3OQQmAABRAsScYxpg/h5VMYARvRrCCNxG2BFtmZquOAAD4i3Ot7mr/egIAwGvXA224BcUMk6pDAAAAAElFTkSuQmCC" /></p>
+ </p>
 <h2 id="7-run-code-automatically-on-boot">7. Run code automatically on boot<a class="headerlink" href="#7-run-code-automatically-on-boot" title="Permanent link">&para;</a></h2>
 <p>MicroPython uses:
 - boot.py
-- main.py
-Upload:
+- main.py</p>
+<p>Upload:</p>
 <div class="highlight"><pre><span></span><code>mpremote<span class="w"> </span>connect<span class="w"> </span>auto<span class="w"> </span>fs<span class="w"> </span>cp<span class="w"> </span>main.py<span class="w"> </span>:main.py
 mpremote<span class="w"> </span>connect<span class="w"> </span>auto<span class="w"> </span>reset
 </code></pre></div>
-<img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANUlEQVR4nO3OMQ2AABAAsSPBCUbfEm6YmFDBhAU2QtIq6DIzW7UHAMBfnGt1V8fXEwAAXrse/w8F7pbTa1oAAAAASUVORK5CYII=" /></p>
 <h2 id="8-upload-a-library-folder">8. Upload a library folder<a class="headerlink" href="#8-upload-a-library-folder" title="Permanent link">&para;</a></h2>
 <p><div class="highlight"><pre><span></span><code>mpremote<span class="w"> </span>connect<span class="w"> </span>auto<span class="w"> </span>fs<span class="w"> </span>mkdir<span class="w"> </span>:lib
 mpremote<span class="w"> </span>connect<span class="w"> </span>auto<span class="w"> </span>fs<span class="w"> </span>cp<span class="w"> </span>-r<span class="w"> </span>lib/.<span class="w"> </span>:lib/
 </code></pre></div>
- 
-<img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANElEQVR4nO3OMQ0AIAwAwZIgBKnVgjN8dGDBABMhuZt+/JaZIyJmAADwi9VP1NMNAABu1AaU3AUhiyfJeAAAAABJRU5ErkJggg==" /></p>
+ </p>
 <h2 id="9-useful-commands">9. Useful commands<a class="headerlink" href="#9-useful-commands" title="Permanent link">&para;</a></h2>
-<p>List files:
-<code>mpremote connect auto fs ls</code></p>
-<p>View file:
-<code>mpremote connect auto fs cat :main.py</code>
- 
-Delete file:
-<code>mpremote connect auto fs rm :main.py</code>
- 
-Reset board:
-<code>mpremote connect auto reset</code>
- 
-<img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANklEQVR4nO3OMQ2AABAAsSNBACPq8MH2NpGACyywEZJWQZeZ2aszAAD+4l6rrTq+ngAA8Nr1AL/KBEe6dElaAAAAAElFTkSuQmCC" /></p>
+<p>List files:</p>
+<p><code>mpremote connect auto fs ls</code></p>
+<p>View file:</p>
+<p><code>mpremote connect auto fs cat :main.py</code></p>
+<p>Delete file:</p>
+<p><code>mpremote connect auto fs rm :main.py</code></p>
+<p>Reset board:</p>
+<p><code>mpremote connect auto reset</code></p>
 <h2 id="10-minimal-example-using-the-5-on-board-leds">10. Minimal example using the 5 on-board LEDs<a class="headerlink" href="#10-minimal-example-using-the-5-on-board-leds" title="Permanent link">&para;</a></h2>
 <p>main.py:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">machine</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pin</span>
@@ -877,28 +862,27 @@ Reset board:
 <span class="n">np</span> <span class="o">=</span> <span class="n">NeoPixel</span><span class="p">(</span><span class="n">Pin</span><span class="p">(</span><span class="n">PIN_NUM</span><span class="p">),</span> <span class="n">NUM_LEDS</span><span class="p">)</span>
 
 <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span> <span class="c1"># Red</span>
-<span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
-<span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span> <span class="c1"># Green</span>
-<span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
-<span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span> <span class="c1"># Blue</span>
-<span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-<span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
-<span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span> <span class="c1"># Off</span>
-<span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
-<span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span> <span class="c1"># Red</span>
+        <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span> <span class="c1"># Green</span>
+        <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span> <span class="c1"># Blue</span>
+        <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_LEDS</span><span class="p">):</span> <span class="c1"># Off</span>
+        <span class="n">np</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
 </code></pre></div>
-<p>Upload:
-<code>mpremote connect auto fs cp main.py :main.py</code>
- <code>mpremote connect auto reset</code>
- 
-<img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANElEQVR4nO3OQQmAABRAsSdYxKY/jMFMIZ7ECt5E2BJsmZmt2gMA4C+Otbqr8+sJAACvXQ85QgYXd/O+eQAAAABJRU5ErkJggg==" /></p>
+<p>Upload:</p>
+<div class="highlight"><pre><span></span><code>mpremote<span class="w"> </span>connect<span class="w"> </span>auto<span class="w"> </span>fs<span class="w"> </span>cp<span class="w"> </span>main.py<span class="w"> </span>:main.py
+mpremote<span class="w"> </span>connect<span class="w"> </span>auto<span class="w"> </span>reset
+</code></pre></div>
 <h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
 <h3 id="board-not-detected">Board not detected<a class="headerlink" href="#board-not-detected" title="Permanent link">&para;</a></h3>
 <ul>
@@ -907,11 +891,10 @@ Reset board:
 <li>check the serial port name</li>
 </ul>
 <h3 id="permission-denied-on-linux">Permission denied on Linux<a class="headerlink" href="#permission-denied-on-linux" title="Permanent link">&para;</a></h3>
-<p>sudo usermod -a -G dialout $USER
-Log out and log back in.</p>
+<p><code>sudo usermod -a -G dialout $USER</code></p>
+<p>Log out and log back in.</p>
 <h3 id="code-crashes-on-boot">Code crashes on boot<a class="headerlink" href="#code-crashes-on-boot" title="Permanent link">&para;</a></h3>
-<p>Your main.py may contain an error. Replace or remove it using mpremote.</p>
-<p><img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAAACCAYAAAA3pIp+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAANUlEQVR4nO3OMQ2AABAAsSNhZscYahheJwqQgQU2QtIq6DIze3UGAMBf3Gu1VcfXEwAAXrseoqcEQXyAWBgAAAAASUVORK5CYII=" /></p>
+<p>Your <code>main.py</code> may contain an error. Replace or remove it using <code>mpremote</code>.</p>
 
 
 
